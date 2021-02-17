@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
+const axios = require('axios')
 
 require('dotenv').config();
 
@@ -15,10 +16,18 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.json({
-    message: '👋🏼'
-  })
+const headers = {
+  headers: {
+    'x-rapidapi-key': process.env.WARZONE_KEY,
+    'x-rapidapi-host': process.env.WARZONE_HOST
+  }
+}
+
+app.get('/', async (req, res) => {
+  const username = req.params.username
+  const platform = req.params.platform
+  const { data } = await axios.get(`https://${process.env.WARZONE_HOST}/warzone/glennarnold/psn`, headers)
+  res.send(data)
 });
 
 app.use('/api/v1', api);
