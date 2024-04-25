@@ -1,3 +1,3 @@
 # sigl
 
-> API for securing API keys used on client-side projects 🕵🏻‍♂️
+> Middleware to avoid exposing secrets in hobby projects 🕵🏻‍♂️
